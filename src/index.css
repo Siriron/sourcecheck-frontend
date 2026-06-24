@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #faf5ff;
+    color: #1e1b4b;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(135deg, #7c3aed, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bg-hero {
+    background: linear-gradient(135deg, #f3e8ff 0%, #fce7f3 50%, #ede9fe 100%);
+  }
+  .card-glass {
+    background: rgba(255,255,255,0.70);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(168,85,247,0.12);
+  }
+  .shimmer-btn {
+    background: linear-gradient(90deg, #7c3aed, #a855f7, #ec4899, #a855f7, #7c3aed);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  .verdict-supported  { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+  .verdict-disputed   { background: #fff1f2; color: #be123c; border-color: #fecdd3; }
+  .verdict-unverifiable { background: #fefce8; color: #a16207; border-color: #fef08a; }
+  .verdict-pending    { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f3e8ff; }
+::-webkit-scrollbar-thumb { background: #c084fc; border-radius: 3px; }
