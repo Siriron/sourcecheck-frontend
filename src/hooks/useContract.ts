@@ -63,6 +63,7 @@ export function useContract(network: NetworkKey) {
         address: contractAddress,
         functionName: 'submit_check',
         args: [url, claim],
+        value: BigInt(0),
       })
       onStatus?.('Waiting for validator consensus...')
       let receipt = null
