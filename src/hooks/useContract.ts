@@ -72,12 +72,9 @@ export function useContract(network: NetworkKey) {
         await new Promise(r => setTimeout(r, 3000))
         try {
           receipt = await client.getTransactionReceipt({ hash: txHash })
-          if (
-            receipt?.status === 'ACCEPTED' ||
-            receipt?.status === 'FINALIZED'
-          ) break
-          if (receipt?.status === 'UNDETERMINED') {
-            throw new Error('Validators could not reach consensus. Try again.')
+          if (receipt?.status === 'success') break
+          if (receipt?.status === 'reverted') {
+            throw new Error('Transaction reverted. Validators could not reach consensus.')
           }
         } catch (e: any) {
           if (e.message?.includes('consensus')) throw e
