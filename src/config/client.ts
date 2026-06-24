@@ -1,4 +1,4 @@
-import { createClient, simulator } from 'genlayer-js'
+import { createClient } from 'genlayer-js'
 import { NETWORKS, type NetworkKey } from '../config/chains'
 
 export function getReadClient(network: NetworkKey) {
