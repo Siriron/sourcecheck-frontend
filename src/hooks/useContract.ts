@@ -63,7 +63,6 @@ export function useContract(network: NetworkKey) {
         address: contractAddress,
         functionName: 'submit_check',
         args: [url, claim],
-        value: BigInt(0),
       })
       onStatus?.('Waiting for validator consensus...')
       let receipt = null
@@ -72,12 +71,9 @@ export function useContract(network: NetworkKey) {
         await new Promise(r => setTimeout(r, 3000))
         try {
           receipt = await client.getTransactionReceipt({ hash: txHash })
-          if (receipt?.status === 'success') break
-          if (receipt?.status === 'reverted') {
-            throw new Error('Transaction reverted. Validators could not reach consensus.')
-          }
-        } catch (e: any) {
-          if (e.message?.includes('consensus')) throw e
+          if (receipt) break
+        } catch {
+          // still pending
         }
         attempts++
       }
