@@ -2,7 +2,7 @@
 
 > A GenLayer intelligent contract that reaches validator consensus on whether a source URL supports a claim.
 
-**Live App:** https://sourcecheck.vercel.app  
+**Live App:** https://sourcecheck-genlayer.vercel.app/ 
 **Network:** GenLayer StudioNet + Bradbury Testnet
 
 ---
