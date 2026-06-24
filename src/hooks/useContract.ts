@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react'
 import { getReadClient, getWriteClient } from '../config/client'
 import { NETWORKS, type NetworkKey } from '../config/chains'
-import { TransactionStatus } from 'genlayer-js'
 
 export interface CheckEntry {
   check_id: string
@@ -74,10 +73,10 @@ export function useContract(network: NetworkKey) {
         try {
           receipt = await client.getTransactionReceipt({ hash: txHash })
           if (
-            receipt?.status === TransactionStatus.ACCEPTED ||
-            receipt?.status === TransactionStatus.FINALIZED
+            receipt?.status === 'ACCEPTED' ||
+            receipt?.status === 'FINALIZED'
           ) break
-          if (receipt?.status === TransactionStatus.UNDETERMINED) {
+          if (receipt?.status === 'UNDETERMINED') {
             throw new Error('Validators could not reach consensus. Try again.')
           }
         } catch (e: any) {
