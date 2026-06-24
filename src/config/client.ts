@@ -1,28 +1,23 @@
-import { createClient } from 'genlayer-js'
-import { NETWORKS, type NetworkKey } from '../config/chains'
+import { createClient, bradbury, studionet } from 'genlayer-js'
+import { type NetworkKey } from './chains'
 
 export function getReadClient(network: NetworkKey) {
-  const net = NETWORKS[network]
-  return createClient({
-    chain: { id: net.chainId, rpcUrls: { default: { http: [net.rpcUrl] } } } as any,
-  })
+  const chain = network === 'bradbury' ? bradbury : studionet
+  return createClient({ chain })
 }
 
 export async function getWriteClient(network: NetworkKey) {
-  const net = NETWORKS[network]
   if (!window.ethereum) throw new Error('No wallet detected. Please install MetaMask.')
+  const chain = network === 'bradbury' ? bradbury : studionet
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
   const client = createClient({
-    chain: { id: net.chainId, rpcUrls: { default: { http: [net.rpcUrl] } } } as any,
+    chain,
     account: accounts[0],
     provider: window.ethereum,
   })
-  await client.connect()
   return client
 }
 
 declare global {
-  interface Window {
-    ethereum?: any
-  }
+  interface Window { ethereum?: any }
 }
